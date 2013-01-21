@@ -1,0 +1,23 @@
+"Number","Name"
+"000","Default profit center"
+"100","Reuse"
+"200","R&R"
+"300","Sales"
+400,"All other programs"
+410,Volunteer
+420,Education
+430,"Technical Support"
+440,"Hardware Grants"
+470,NPA
+480,"Internet Library"
+490,Replication
+"500","Management and General"
+"700","Fundraising"
+910,"Central services cost pool"
+920,"Common cost pool by line item"
+930,"Common cost pool-other"
+931,"Cost pool by sqaure foot"
+932,"Thrift store sales income pool"
+933,"Bulk sales income pool"
+934,"Online sales income pool"
+980,"Capital/fixed asset purchases pool"

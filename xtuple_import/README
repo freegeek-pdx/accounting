@@ -1,0 +1,38 @@
+Grab current gnucash file:
+$ cp /home/rfs/Desktop/whatever/current.gnucash ./
+$ gnucash current.gnucash
+
+File -> Export -> Chart of Accounts to QSF
+Save as import/accounts.qsf
+
+Generate the accounts.csv
+$ cd import
+$ ./parse_accounts.rb > accounts.csv
+$ ./CSVImp/csvimp
+
+Import in CSVImp:
+Log in
+Go to Map->Edit
+ - Then File->Open
+ - Choose csvimp.xml
+ - Select Step 1 map for profit centers, close dialog
+File->Open CSV
+ - Open profit_center.csv
+Go To Import->Start
+Repeat for steps 2 and 3 in maps
+
+Then generate the account code to ID hash on lima:
+# ryan52@ernie:~$ cd import
+# ryan52@ernie:~/import$ ssh lima ./generate_account_id_hash.sh > accounts.rb
+# ryan52@ernie:~/import$ ./parse_gnucash.rb > transactions.csv
+
+Then open CSVImp and import transactions.csv using transactions.xml.
+
+Next, run this SQL to populate some of the totals:
+
+# ryan52@ernie:~/import$ cat calculate_trial_balances.sql | ssh lima psql xtuple
+
+Setup your General Ledger to allow for "Manual Forward Update Trial
+Balance". This will enable a little utility that will fix the summary
+balances. Log out and log back into the sytem, then on the Accounting
+menu, use the "Utility->Forward update accounts. This will update totals.

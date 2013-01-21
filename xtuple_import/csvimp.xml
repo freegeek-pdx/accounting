@@ -1,0 +1,124 @@
+<!DOCTYPE openCSVAtlasDef>
+<CSVAtlas>
+ <CSVMap>
+  <Name>Profit Center (step 1)</Name>
+  <Table>public.prftcntr</Table>
+  <Action>Insert</Action>
+  <PreSQL>DELETE FROM public.prftcntr;</PreSQL>
+  <CSVMapField>
+   <Name>prftcntr_number</Name>
+   <isKey/>
+   <Type>QString</Type>
+   <Column>1</Column>
+  </CSVMapField>
+  <CSVMapField>
+   <Name>prftcntr_descrip</Name>
+   <isKey/>
+   <Type>QString</Type>
+   <Column>2</Column>
+  </CSVMapField>
+ </CSVMap>
+ <CSVMap>
+  <Name>Subaccounts (step 2)</Name>
+  <Table>public.subaccnt</Table>
+  <Action>Insert</Action>
+  <PreSQL>DELETE FROM subaccnt;</PreSQL>
+  <CSVMapField>
+   <Name>subaccnt_number</Name>
+   <isKey/>
+   <Type>QString</Type>
+   <Column>1</Column>
+  </CSVMapField>
+  <CSVMapField>
+   <Name>subaccnt_descrip</Name>
+   <isKey/>
+   <Type>QString</Type>
+   <Column>2</Column>
+  </CSVMapField>
+ </CSVMap>
+ <CSVMap>
+  <Name>GnuCash Account Import (step 3)</Name>
+  <Table>public.accnt</Table>
+  <Action>Insert</Action>
+  <PreSQL>ALTER TABLE gltrans DISABLE TRIGGER ALL;
+DELETE FROM gltrans;
+ALTER TABLE gltrans ENABLE TRIGGER ALL;
+DELETE FROM stdjrnl;
+DELETE FROM trialbal;
+DELETE FROM public.checkhead;
+DELETE FROM public.bankaccnt;
+DELETE FROM public.costcat;
+DELETE FROM public.araccnt;
+DELETE FROM public.apaccnt;
+DELETE FROM public.whsinfo;
+DELETE FROM public.sitetype;
+DELETE FROM public.taxass;
+DELETE FROM public.taxzone;
+DELETE FROM public.taxrate;
+DELETE FROM public.taxauth;
+DELETE FROM public.expcat;
+DELETE FROM public.salesaccnt;
+UPDATE public.company SET company_yearend_accnt_id = NULL, company_gainloss_accnt_id = NULL, company_dscrp_accnt_id = NULL, company_unrlzgainloss_accnt_id = NULL;
+DELETE FROM public.accnt;
+DELETE FROM public.company;
+INSERT INTO public.company(company_descrip, company_number) VALUES('Free Geek', '01');</PreSQL>
+  <PostSQL>UPDATE public.company SET
+company_yearend_accnt_id = (SELECT accnt_id FROM accnt WHERE accnt_number = '3000' AND accnt_sub LIKE '000'),
+company_gainloss_accnt_id = (SELECT accnt_id FROM accnt WHERE accnt_number = '8999' AND accnt_sub LIKE '000'),
+company_dscrp_accnt_id = (SELECT accnt_id FROM accnt WHERE accnt_number = '8998' AND accnt_sub LIKE '000'),
+company_unrlzgainloss_accnt_id = NULL;</PostSQL>
+  <CSVMapField>
+   <Name>accnt_number</Name>
+   <isKey/>
+   <Type>QString</Type>
+   <Column>3</Column>
+  </CSVMapField>
+  <CSVMapField>
+   <Name>accnt_descrip</Name>
+   <isKey/>
+   <Type>QString</Type>
+   <Column>6</Column>
+  </CSVMapField>
+  <CSVMapField>
+   <Name>accnt_comments</Name>
+   <isKey/>
+   <Type>QString</Type>
+   <Column>8</Column>
+  </CSVMapField>
+  <CSVMapField>
+   <Name>accnt_sub</Name>
+   <isKey/>
+   <Type>QString</Type>
+   <Column>4</Column>
+  </CSVMapField>
+  <CSVMapField>
+   <Name>accnt_type</Name>
+   <isKey/>
+   <Column>1</Column>
+  </CSVMapField>
+  <CSVMapField>
+   <Name>accnt_subaccnttype_code</Name>
+   <isKey/>
+   <Type>QString</Type>
+   <Column>2</Column>
+  </CSVMapField>
+  <CSVMapField>
+   <Name>accnt_extref</Name>
+   <isKey/>
+   <Type>QString</Type>
+   <Column>7</Column>
+  </CSVMapField>
+  <CSVMapField>
+   <Name>accnt_profit</Name>
+   <isKey/>
+   <Type>QString</Type>
+   <Column>9</Column>
+  </CSVMapField>
+  <CSVMapField>
+   <Name>accnt_company</Name>
+   <Type>QString</Type>
+   <Action>UseAlternateValue</Action>
+   <AltValue>01</AltValue>
+  </CSVMapField>
+ </CSVMap>
+</CSVAtlas>
