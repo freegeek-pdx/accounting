@@ -1,0 +1,19 @@
+== FIRST, make allocations.csv as needed (and make sure ~/subaccounts.csv and other deps are up to date) ==
+
+On ernie:
+ryan52@ernie:~$ scp import/subaccounts.csv lima:
+
+Do this first:
+ryan52@lima:~/allocations/real$ ../../get_balances.sh  930 2012 Dec > input.csv
+ryan52@lima:~/allocations/real$ ../allocate.rb input.csv allocations.csv output.csv 
+ryan52@lima:~/allocations/real$ ../gen_sql.rb 2012-12-19 930 input.csv allocations.csv output.csv > output.sql
+ryan52@lima:~/allocations/real$ psql xtuple < output.sql 
+
+If it had error requiring created accounts, redo SQL process once more.
+ryan52@lima:~/allocations/real$ ../gen_sql.rb 2012-12-19 930 input.csv allocations.csv output.csv > output.sql
+ryan52@lima:~/allocations/real$ psql xtuple < output.sql 
+
+Then fix the trail balances:
+ryan52@lima:~/allocations/real$ echo 'DELETE FROM trialbal;' | psql xtuple
+ryan52@lima:~/allocations/real$ psql xtuple < /home/ryan52/calculate_trial_balances.sql
+# FORWARD MIGRATE TRAIL BALANCES AGAIN

@@ -1,0 +1,22 @@
+NOTE: Install postgresql and required postgresql-contrib package.
+
+Set in /etc/postgresql/8.4/main/postgresql.conf:
+listen_addresses = '*'
+
+Also added to /etc/postgresql/8.4/main/pg_hba.conf:
+host 	all	    all		192.168.0.0/16	      md5
+
+And restart postgres:
+$ sudo /etc/init.d/postgresql restart
+
+Then run on command line (admin user is important):
+$ createdb xtuple
+$ createuser admin
+
+And as "postgres" user in "psql":
+CREATE GROUP xtrole;
+ALTER GROUP xtrole ADD USER admin;
+ALTER USER admin PASSWORD 'password';
+
+Then load the "empty" database from xtuple source:
+$ pg_restore -d xtuple postbooks_empty-3.8.2.backup
