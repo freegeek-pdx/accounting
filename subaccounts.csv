@@ -1,0 +1,63 @@
+code,description
+000,"filler 0"
+001,"filler 1"
+002,"filler 2"
+003,"filler 3"
+004,"filler 4"
+005,"filler 5"
+006,"filler 6"
+007,"filler 7"
+008,"filler 8"
+009,"filler 9"
+100,Reuse
+110,Prebuild
+120,"Desktop Build"
+130,"Laptop Build"
+140,"Hardware Testing"
+150,"Server Build"
+160,"Macintosh Build"
+170,"Handheld Gizmos"
+180,A/V
+190,Printers
+200,"Receiving and Recycling"
+210,Receiving
+220,Recycling
+230,Pickups
+300,"Sales, non-reuse related"
+310,"Sales, processed in receiving"
+320,"Sales, desktops"
+330,"Sales, laptops"
+340,"Sales, processed in production"
+350,"Sales, servers"
+360,"Sales, macintoshes"
+370,"Sales, handheld gizmos"
+380,"Sales, A/V"
+390,"Sales, printers"
+400,"All other programs"
+410,Volunteer
+420,Education
+421,"Job Training"
+422,"Summer Camp"
+430,"Technical Support"
+440,"Hardware Grants"
+470,NPA
+480,"Internet Library"
+490,Replication
+491,Intergalactic
+500,"Management and General"
+510,"M&G department-general"
+520,"M&G department-unallowable (A-122)"
+530,"Public relations"
+540,"Investment management"
+550,"Labor relations"
+600,"Management and General"
+610,"M&G special event production"
+620,"M&G special event promotion"
+700,Fundraising
+800,Fundraising
+900,"Cost Pools"
+930,"Common cost pool-other"
+931,"Cost pool by sqaure foot"
+932,"Thrift store sales income pool"
+933,"Bulk sales income pool"
+934,"Online sales income pool"
